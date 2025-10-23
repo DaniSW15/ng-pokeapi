@@ -1,0 +1,23 @@
+<div class="pokemon-list">
+  <h1>Pokémon List</h1>
+
+  @if (store.loading()) {
+  <div class="loading">Cargando pokémons...</div>
+  } @if (store.error()) {
+  <div class="error">{{ store.error() }}</div>
+  }
+
+  <div class="pokemon-grid">
+    @for (pokemon of store.pokemons(); track pokemon.name) {
+    <div class="pokemon-card">
+      <h3>{{ pokemon.name }}</h3>
+      <small>#{{ pokemon.id }}</small>
+      <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+    </div>
+    }
+  </div>
+
+  @if (!store.loading() && store.pokemons().length > 0) {
+  <button (click)="loadMore()">Cargar más</button>
+  }
+</div>
