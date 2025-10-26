@@ -1,4 +1,4 @@
-import { Pokemon } from "@app/core/models/pokemon.model";
+import { Pokemon } from '@app/core/models/pokemon.model';
 
 export interface PokemonDetailState {
   pokemon: Pokemon | null;
@@ -9,5 +9,5 @@ export interface PokemonDetailState {
 export const initialState: PokemonDetailState = {
   pokemon: null,
   loading: false,
-  error: null
+  error: null,
 };

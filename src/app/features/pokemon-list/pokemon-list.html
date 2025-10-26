@@ -11,8 +11,8 @@
     @for (pokemon of store.pokemons(); track pokemon.name) {
     <div class="pokemon-card">
       <h3>{{ pokemon.name }}</h3>
-      <small>#{{ pokemon.id }}</small>
-      <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+      <small>{{ pokemon.id | pokemonId }}</small>
+      <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
     </div>
     }
   </div>

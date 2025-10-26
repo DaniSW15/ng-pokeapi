@@ -1,16 +1,15 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { PokemonListStore } from './store/pokemon-list.store';
 import { PokemonListEffects } from './store/pokemon-list.effects';
+import { PokemonIdPipe } from '../../shared/pipes/pokemon-id.pipe';
 
 @Component({
   selector: 'app-pokemon-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './pokemon-list.component.html',
-  styleUrl: './pokemon-list.component.scss',
+  imports: [PokemonIdPipe],
+  templateUrl: './pokemon-list.html',
+  styleUrl: './pokemon-list.scss',
 })
-export class PokemonListComponent {
+export class PokemonListComponent implements OnInit {
   store = inject(PokemonListStore);
   effects = inject(PokemonListEffects);
 
@@ -20,6 +19,6 @@ export class PokemonListComponent {
 
   loadMore() {
     const offset = this.store.pokemons().length;
-    this.effects.loadPokemons(20, offset);
+    this.effects.loadPokemons(40, offset);
   }
 }

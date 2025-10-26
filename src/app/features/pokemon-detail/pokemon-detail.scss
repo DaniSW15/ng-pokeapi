@@ -1,0 +1,322 @@
+.pokemon-detail {
+  min-height: 100vh;
+  background: #f0f0f0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.search-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem;
+
+  h2 {
+    margin: 0 0 1rem;
+    color: #333;
+    font-size: 1.25rem;
+  }
+
+  .search-box {
+    display: flex;
+    gap: 0.5rem;
+
+    input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        border-color: #dc0a2d;
+      }
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background: #dc0a2d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background: #a00821;
+      }
+    }
+  }
+
+  .error {
+    color: #f44336;
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+  }
+
+  .search-method {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+
+      input[type="radio"] {
+        cursor: pointer;
+      }
+    }
+  }
+
+  select {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: #dc0a2d;
+    }
+  }
+}
+
+.loading {
+  color: #666;
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+}
+
+.detail-card {
+  background: #dc0a2d;
+  border-radius: 24px 24px 8px 8px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 -8px 0 rgba(0, 0, 0, 0.2);
+  border: 8px solid #1a1a1a;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #4fc3f7 40%, #0288d1 60%, #01579b 100%);
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    right: 5rem;
+    width: 15px;
+    height: 15px;
+    background: #fdd835;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #1a1a1a, 30px 0 0 0 #4caf50, 30px 0 0 4px #1a1a1a, 60px 0 0 0 #f44336,
+      60px 0 0 4px #1a1a1a;
+  }
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0 1rem;
+
+  h1 {
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+    text-transform: capitalize;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .pokemon-id {
+    font-size: 1rem;
+    color: #ffcdd2;
+    font-weight: bold;
+  }
+}
+
+.detail-image {
+  text-align: center;
+  background: #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 6px solid #9e9e9e;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+  }
+}
+
+.detail-types {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+
+  .type {
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    &.grass {
+      background: #78c850;
+    }
+    &.poison {
+      background: #a040a0;
+    }
+    &.fire {
+      background: #f08030;
+    }
+    &.water {
+      background: #6890f0;
+    }
+    &.electric {
+      background: #f8d030;
+      color: #333;
+    }
+    &.normal {
+      background: #a8a878;
+    }
+    &.bug {
+      background: #a8b820;
+    }
+    &.flying {
+      background: #a890f0;
+    }
+    &.fighting {
+      background: #c03028;
+    }
+    &.psychic {
+      background: #f85888;
+    }
+    &.rock {
+      background: #b8a038;
+    }
+    &.ground {
+      background: #e0c068;
+    }
+    &.ice {
+      background: #98d8d8;
+    }
+    &.dragon {
+      background: #7038f8;
+    }
+    &.dark {
+      background: #705848;
+    }
+    &.steel {
+      background: #b8b8d0;
+    }
+    &.fairy {
+      background: #ee99ac;
+    }
+    &.ghost {
+      background: #705898;
+    }
+  }
+}
+
+.detail-info {
+  background: #4caf50;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  .info-item {
+    color: white;
+    text-align: center;
+    margin: 0.5rem 0;
+
+    .label {
+      display: inline;
+      font-size: 0.875rem;
+      font-weight: bold;
+    }
+
+    .value {
+      display: inline;
+      font-size: 0.875rem;
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+.detail-stats {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+
+  h3 {
+    color: white;
+    margin: 0 0 1rem;
+    font-size: 1rem;
+  }
+
+  .stat {
+    display: grid;
+    grid-template-columns: 70px 1fr 40px;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+
+    .stat-name {
+      color: white;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .stat-bar {
+      background: rgba(0, 0, 0, 0.3);
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+
+      .stat-fill {
+        background: #fdd835;
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .stat-value {
+      color: white;
+      font-weight: bold;
+      text-align: right;
+      font-size: 0.875rem;
+    }
+  }
+}

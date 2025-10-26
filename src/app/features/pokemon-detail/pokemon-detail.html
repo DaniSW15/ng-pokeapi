@@ -1,1 +1,92 @@
-<p>pokemon-detail works!</p>
+<div class="pokemon-detail">
+  <div>
+    <div class="search-card">
+      <h2>Buscar Pokémon</h2>
+      <div class="search-method">
+        <label>
+          <input type="radio" [(ngModel)]="searchMethod" value="input" name="method" />
+          Buscar por nombre/ID
+        </label>
+        <label>
+          <input type="radio" [(ngModel)]="searchMethod" value="select" name="method" />
+          Seleccionar de lista
+        </label>
+      </div>
+      @if (searchMethod() === 'input') {
+      <div class="search-box">
+        <input
+          type="text"
+          [(ngModel)]="searchInput"
+          (keyup.enter)="searchPokemon()"
+          placeholder="Nombre o ID (ej: pikachu o 25)"
+        />
+        <button (click)="searchPokemon()">Buscar</button>
+      </div>
+      } @else {
+      <div class="search-box">
+        <select [(ngModel)]="selectedPokemon" (change)="onSelectPokemon()">
+          <option value="">-- Selecciona un Pokémon --</option>
+          @for (p of popularPokemons; track p.id) {
+          <option [value]="p.name">{{ p.name }} - #{{ p.id }}</option>
+          }
+        </select>
+      </div>
+      }
+      @if (error()) {
+      <p class="error">{{ error() }}</p>
+      }
+      @if (loading()) {
+      <p class="loading">Cargando...</p>
+      }
+    </div>
+  </div>
+
+  @if (pokemon()) {
+  <div>
+    <div class="detail-card">
+      <div class="detail-header">
+        <h1>{{ pokemon()!.name }}</h1>
+        <span class="pokemon-id">{{ pokemon()!.id | pokemonId }}</span>
+      </div>
+
+      <div class="detail-image">
+        <img
+          [src]="pokemon()!.sprites.other['official-artwork'].front_default"
+          [alt]="pokemon()!.name"
+          appImgFallback="https://via.placeholder.com/180?text=No+Image"
+        />
+      </div>
+
+      <div class="detail-types">
+        @for (type of pokemon()!.types; track type.type.name) {
+        <span [appPokemonType]="type.type.name">{{ type.type.name }}</span>
+        }
+      </div>
+
+      <div class="detail-info">
+        <div class="info-item">
+          <span class="label">Height</span>
+          <span class="value">{{ pokemon()!.height / 10 }} m</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Weight</span>
+          <span class="value">{{ pokemon()!.weight / 10 }} kg</span>
+        </div>
+      </div>
+
+      <div class="detail-stats">
+        <h3>Stats</h3>
+        @for (stat of pokemon()!.stats; track stat.stat.name) {
+        <div class="stat">
+          <span class="stat-name">{{ stat.stat.name }}</span>
+          <div class="stat-bar">
+            <div class="stat-fill" [style.width.%]="stat.base_stat | statPercentage"></div>
+          </div>
+          <span class="stat-value">{{ stat.base_stat }}</span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

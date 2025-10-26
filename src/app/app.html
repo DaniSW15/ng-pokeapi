@@ -1,1 +1,6 @@
+@if (!networkService.isOnline()) {
+<div class="offline-banner">
+  <span>⚠️ Sin conexión a internet</span>
+</div>
+}
 <router-outlet />
